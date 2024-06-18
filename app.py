@@ -8,15 +8,15 @@ import requests
 url = 'https://box.hu-berlin.de/f/76bd096c4be649be80db/?dl=1'
 
 try:
-    # Download the file
-    response = requests.get(url)
-    response.raise_for_status()  # Ensure the request was successful
-
-    # Load the pickle file content into a dictionary
-    data = pickle.loads(response.content)
-
-    # Print or use the dictionary
-    k = list(data.keys())[0]
+    # # Download the file
+    # response = requests.get(url)
+    # response.raise_for_status()  # Ensure the request was successful
+    #
+    # # Load the pickle file content into a dictionary
+    # data = pickle.loads(response.content)
+    #
+    # # Print or use the dictionary
+    # k = list(data.keys())[0]
 
     state = 'a'
 
@@ -69,7 +69,7 @@ app = Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
 app.layout = html.Div([
-    html.H1(f'Hello World: {state}, {k}'),
+    html.H1(f'Hello World: {state}'),
     dcc.Dropdown(['LA', 'NYC', 'MTL'],
         'LA',
         id='dropdown'
