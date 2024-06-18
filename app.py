@@ -9,10 +9,13 @@ local_filename = 'matilda_scenarios.pickle'
 
 try:
     matilda_scenarios = pickle_to_dict(f"matilda_scenarios.pickle")
+
+    state = 'a'
 except OSError as e:
     print(e)
 
     try:
+        state = 'b'
         print('try downloading file...')
 
         # Download the file
@@ -30,9 +33,11 @@ except OSError as e:
 
         df = matilda_scenarios['SSP2']['MPI-ESM1-2-HR']['model_output']
         print('DF length:', len(df))
+        state = 'c'
 
     except requests.exceptions.RequestException as e:
         print(f"Error downloading the file: {e}")
+        state = 'd'
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -42,7 +47,7 @@ app = Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
 app.layout = html.Div([
-    html.H1('Hello World'),
+    html.H1(f'Hello World: {state}'),
     dcc.Dropdown(['LA', 'NYC', 'MTL'],
         'LA',
         id='dropdown'
